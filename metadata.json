@@ -1,0 +1,6 @@
+{
+  "name": "Salem District Administration Society",
+  "description": "A professional platform for Salem District Administration Society (SDAS) coordinating Corporate Social Responsibility (CSR) partnerships in Salem, Tamil Nadu.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
