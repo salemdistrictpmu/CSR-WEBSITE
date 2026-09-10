@@ -418,7 +418,7 @@ export default function InterventionsView() {
     // 22. Animal Husbandry
     if (norm.includes('animal') || norm.includes('husbandry') || norm.includes('veterinary') || norm.includes('cattle') || norm.includes('dairy')) {
       return {
-        image: "https://images.unsplash.com/photo-1527153857715-3908f2ae5e81?auto=format&fit=crop&w=1200&q=80",
+        image: "https://images.unsplash.com/photo-1570042225831-d98fa7577f1e?auto=format&fit=crop&w=1200&q=80",
         gradient: "from-emerald-700 to-amber-800",
         borderGroup: "border-emerald-200/80",
         indicator: "bg-amber-400",
