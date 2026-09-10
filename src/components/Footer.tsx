@@ -86,7 +86,9 @@ export default function Footer({ setActivePage }: FooterProps) {
             </li>
             <li className="flex items-center gap-2.5">
               <Phone size={15} className="text-[#1B6CA8] shrink-0" />
-              <span>0427-2452244 (Collectorate Helpline)</span>
+              <a href="tel:9566999695" className="hover:text-emerald-300 transition-colors font-mono">
+                +91 95669 99695 (PMU Desk)
+              </a>
             </li>
             <li className="flex items-center gap-2.5">
               <MapPin size={15} className="text-[#1B6CA8] shrink-0" />

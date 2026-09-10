@@ -276,17 +276,27 @@ export default function ContactView() {
             </div>
           </div>
 
-          {/* Administrative Helpline */}
+          {/* Salem District PMU Coordinates */}
           <div className="border border-gray-200 rounded-2xl p-6">
-            <span className="text-[9px] font-bold text-gray-400 uppercase tracking-widest block mb-4">Administrative Helpline</span>
+            <span className="text-[9px] font-bold text-emerald-600 uppercase tracking-widest block mb-4">Salem District PMU</span>
             <div className="flex items-start gap-3">
               <Phone size={18} className="text-emerald-600 shrink-0 mt-0.5" />
-              <div>
-                <h4 className="font-extrabold text-sm text-gray-900">0427-2452244</h4>
-                <p className="text-[11px] text-gray-500 mb-2">Collectorate Reception (Landline)</p>
-                <a href="https://salem.nic.in" target="_blank" rel="noreferrer" className="text-[11px] font-bold text-emerald-600 hover:underline flex items-center gap-1">
-                  salem.nic.in <ArrowUpRight size={10} />
+              <div className="space-y-1.5">
+                <a 
+                  href="tel:9566999695" 
+                  className="font-extrabold text-sm text-gray-900 hover:text-emerald-600 transition-colors block font-mono"
+                  title="Click to call PMU"
+                >
+                  +91 95669 99695
                 </a>
+                <p className="text-[11px] text-gray-500">Project Management Unit (PMU)</p>
+                <button
+                  onClick={() => handleOpenEmailOptions('salemdistrictpmu@gmail.com', 'Salem District PMU', 'Project Management Unit')}
+                  className="text-[12px] font-bold text-emerald-600 hover:underline flex items-center gap-1.5 cursor-pointer pt-1"
+                >
+                  <Mail size={12} />
+                  <span>salemdistrictpmu@gmail.com</span>
+                </button>
               </div>
             </div>
           </div>

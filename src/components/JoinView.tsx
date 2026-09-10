@@ -218,7 +218,7 @@ export default function JoinView({ setActivePage }: JoinViewProps) {
               Our Project Management Unit (PMU) is available for scheduled discussions, physical site visits, or customized MoUs.
             </p>
             <div className="text-xs font-mono text-[#0A3D62] font-bold">
-              Email: salemdistrictpmu@gmail.com | Tel: +91 427 2452244
+              Email: salemdistrictpmu@gmail.com | Tel: +91 95669 99695
             </div>
           </div>
         </div>
