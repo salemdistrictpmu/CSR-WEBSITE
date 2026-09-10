@@ -278,7 +278,7 @@ export default function ContactView() {
 
           {/* Salem District PMU Coordinates */}
           <div className="border border-gray-200 rounded-2xl p-6">
-            <span className="text-[9px] font-bold text-emerald-600 uppercase tracking-widest block mb-4">Salem District PMU</span>
+            <span className="text-[9px] font-bold text-gray-400 uppercase tracking-widest block mb-4">Salem District PMU</span>
             <div className="flex items-start gap-3">
               <Phone size={18} className="text-emerald-600 shrink-0 mt-0.5" />
               <div className="space-y-1.5">
