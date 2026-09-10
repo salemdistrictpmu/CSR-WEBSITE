@@ -20,6 +20,16 @@ export default function InterventionsView() {
     } catch (e) {}
     return [];
   });
+  const [allInterventions, setAllInterventions] = useState<CSRIntervention[]>(() => {
+    try {
+      const cached = localStorage.getItem('SDAS_ALL_INTERVENTIONS_CACHE');
+      if (cached) {
+        const parsed = JSON.parse(cached);
+        if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+      }
+    } catch (e) {}
+    return [];
+  });
   const [loading, setLoading] = useState(() => {
     try {
       const cached = localStorage.getItem(CACHE_KEY_INTERVENTIONS);
@@ -90,6 +100,7 @@ export default function InterventionsView() {
       const data = await response.json();
       
       if (Array.isArray(data)) {
+        setAllInterventions(data);
         // Only display interventions where Status equals "Open"
         const openInterventions = data.filter((item: CSRIntervention) => 
           item.Status && item.Status.trim().toLowerCase() === 'open'
@@ -351,48 +362,106 @@ export default function InterventionsView() {
     }
   };
 
+  // Metric Calculations for Header Banner (Thoothukudi Blueprint Style)
+  const departmentsCount = new Set(interventions.map(item => item.Sector).filter(Boolean)).size;
+  const totalInitiativesCount = allInterventions.length > 0 ? allInterventions.length : interventions.length;
+  const completedCount = allInterventions.filter(x => {
+    const s = (x.Status || '').trim().toLowerCase();
+    return s === 'close' || s === 'completed' || s === 'closed';
+  }).length;
+  const processingCount = allInterventions.filter(x => {
+    const s = (x.Status || '').trim().toLowerCase();
+    return s === 'processing' || s === 'ongoing' || s === 'in progress';
+  }).length;
+  const inQueueCount = interventions.length;
+
   return (
     <div className="w-full min-h-screen bg-slate-50 py-12 px-4 sm:px-6 lg:px-8 pb-32">
       <div className="max-w-7xl mx-auto space-y-10 animate-fade-in">
         
-        {/* Page Title & Context */}
-        <div className="text-center max-w-3xl mx-auto space-y-4">
-          <div className="inline-flex items-center gap-1.5 bg-[#E8F1F8] border border-[#1B6CA8]/10 text-[#0A3D62] text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-wider">
-            <HeartHandshake size={14} className="text-[#1B6CA8]" />
-            <span>Active Co-Development Initiatives</span>
-          </div>
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#0A3D62] tracking-tight">
-            CSR Interventions
-          </h1>
-          <p className="text-sm sm:text-base text-[#6B7A8F] leading-relaxed max-w-2xl mx-auto">
-            Direct public welfare requirements from educational institutions, primary healthcare centers, water conservation bodies, and rural local authorities across Salem District.
-          </p>
-        </div>
+        {/* District Administrative Projects Header Card (Thoothukudi Blueprint Style) */}
+        <div className="max-w-6xl mx-auto bg-white rounded-3xl p-6 sm:p-8 lg:p-10 border border-slate-200/80 shadow-xs relative overflow-hidden">
+          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+            <div className="space-y-3.5 max-w-2xl">
+              <div className="inline-flex items-center gap-2 bg-slate-900 text-white text-[11px] font-bold px-3.5 py-1.5 rounded-full uppercase tracking-wider shadow-xs">
+                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                <span>DEVELOPMENT BLUEPRINTS</span>
+              </div>
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#0A3D62] tracking-tight">
+                District Administrative Projects
+              </h1>
+              <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
+                Explore local CSR allocations and infrastructure welfare campaigns across departments, structured cleanly for full citizen transparency.
+              </p>
+            </div>
 
-        {/* Stats Summary Bar */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-6xl mx-auto">
-          <div className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-xs flex flex-col justify-between space-y-1">
-            <span className="text-[11px] font-bold text-slate-400 uppercase tracking-widest">Departments</span>
-            <span className="text-xl sm:text-2xl font-extrabold text-[#0A3D62]">
-              {new Set(interventions.map(item => item.Sector).filter(Boolean)).size} Sectors
-            </span>
+            {/* Right Floating Total Initiatives Card */}
+            <div className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-950 text-white p-6 rounded-2xl border border-slate-700/60 shadow-lg shrink-0 lg:w-72 flex flex-col justify-between relative overflow-hidden group">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500/10 rounded-full blur-2xl pointer-events-none"></div>
+              <div className="flex items-center justify-between">
+                <span className="text-[11px] font-bold text-slate-400 uppercase tracking-widest">Total Initiatives</span>
+                <span className="text-[10px] font-bold bg-emerald-500/20 text-emerald-300 px-2.5 py-0.5 rounded-full border border-emerald-500/30">
+                  Live System
+                </span>
+              </div>
+              <div className="my-3">
+                <div className="text-4xl sm:text-5xl font-black text-emerald-400 tracking-tight font-mono">
+                  {totalInitiativesCount < 10 ? `0${totalInitiativesCount}` : totalInitiativesCount}
+                </div>
+                <p className="text-xs text-slate-400 mt-1 font-medium">Verified Public Interventions</p>
+              </div>
+              <div className="pt-3 border-t border-slate-700/60 flex items-center justify-between text-[11px] text-slate-300">
+                <span>Cumulative Outlay</span>
+                <span className="font-bold text-emerald-300 font-mono">₹ {totalCumulativeBudget.toFixed(2)} L</span>
+              </div>
+            </div>
           </div>
-          <div className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-xs flex flex-col justify-between space-y-1">
-            <span className="text-[11px] font-bold text-slate-400 uppercase tracking-widest">Total Initiatives</span>
-            <span className="text-xl sm:text-2xl font-extrabold text-[#0A3D62]">{interventions.length} Sites</span>
-          </div>
-          <div className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-xs flex flex-col justify-between space-y-1">
-            <span className="text-[11px] font-bold text-slate-400 uppercase tracking-widest">Total Outlay</span>
-            <span className="text-xl sm:text-2xl font-extrabold text-emerald-600 font-mono">
-              ₹ {totalCumulativeBudget.toFixed(2)} L
-            </span>
-          </div>
-          <div className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-xs flex flex-col justify-between space-y-1">
-            <span className="text-[11px] font-bold text-slate-400 uppercase tracking-widest">Status</span>
-            <span className="text-xl sm:text-2xl font-extrabold text-emerald-600 flex items-center gap-1.5">
-              <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
-              Open for CSR
-            </span>
+
+          {/* Bottom Row: Status Metrics Pill Boxes */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 mt-8 pt-6 border-t border-slate-100">
+            {/* DEPARTMENTS */}
+            <div className="bg-slate-50/80 hover:bg-slate-100/80 transition-colors p-4 rounded-xl border border-slate-200/60 flex items-center gap-3.5">
+              <div className="w-10 h-10 rounded-lg bg-blue-100 text-blue-800 flex items-center justify-center shrink-0 font-bold">
+                <Layers size={18} />
+              </div>
+              <div>
+                <div className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">DEPARTMENTS</div>
+                <div className="text-base sm:text-lg font-black text-slate-800">{departmentsCount} Sectors</div>
+              </div>
+            </div>
+
+            {/* COMPLETED */}
+            <div className="bg-emerald-50/60 hover:bg-emerald-50 transition-colors p-4 rounded-xl border border-emerald-200/60 flex items-center gap-3.5">
+              <div className="w-10 h-10 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center shrink-0 font-bold">
+                <CheckCircle2 size={18} />
+              </div>
+              <div>
+                <div className="text-[10px] font-bold text-emerald-700 uppercase tracking-wider">COMPLETED</div>
+                <div className="text-base sm:text-lg font-black text-emerald-950">{completedCount} Projects</div>
+              </div>
+            </div>
+
+            {/* PROCESSING */}
+            <div className="bg-amber-50/60 hover:bg-amber-50 transition-colors p-4 rounded-xl border border-amber-200/60 flex items-center gap-3.5">
+              <div className="w-10 h-10 rounded-lg bg-amber-100 text-amber-700 flex items-center justify-center shrink-0 font-bold">
+                <Loader2 size={18} className="animate-spin text-amber-600" />
+              </div>
+              <div>
+                <div className="text-[10px] font-bold text-amber-700 uppercase tracking-wider">PROCESSING</div>
+                <div className="text-base sm:text-lg font-black text-amber-950">{processingCount} In Progress</div>
+              </div>
+            </div>
+
+            {/* IN QUEUE */}
+            <div className="bg-blue-50/60 hover:bg-blue-50 transition-colors p-4 rounded-xl border border-blue-200/60 flex items-center gap-3.5">
+              <div className="w-10 h-10 rounded-lg bg-blue-100 text-blue-700 flex items-center justify-center shrink-0 font-bold">
+                <HeartHandshake size={18} />
+              </div>
+              <div>
+                <div className="text-[10px] font-bold text-blue-700 uppercase tracking-wider">IN QUEUE</div>
+                <div className="text-base sm:text-lg font-black text-blue-950">{inQueueCount} Upcoming</div>
+              </div>
+            </div>
           </div>
         </div>
 
