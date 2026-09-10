@@ -121,10 +121,6 @@ export default function ContactView() {
         <p className="text-sm font-bold text-emerald-600 tracking-widest uppercase">
           DIRECT PUBLIC CHANNELS &mdash; மக்கள் தொடர்பு மையம்
         </p>
-
-        <p className="text-[15px] sm:text-base text-gray-500 leading-relaxed max-w-2xl mx-auto">
-          Official landline and email communications verified from the Salem District Administration portal (salem.nic.in). Click on any detail to copy or connect directly.
-        </p>
       </div>
 
       {/* Sub-header pill */}
