@@ -193,8 +193,10 @@ export default function InterventionsView() {
 
   // Helper to get thematic banner image and colors per sector
   const getSectorMeta = (sectorName: string) => {
-    const norm = (sectorName || '').toLowerCase();
-    if (norm.includes('education') || norm.includes('school')) {
+    const norm = (sectorName || '').toLowerCase().trim();
+
+    // 1. School Education
+    if (norm === 'school education' || (norm.includes('school') && !norm.includes('urban'))) {
       return {
         image: "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=1200&q=80",
         gradient: "from-blue-600 to-indigo-700",
@@ -203,6 +205,67 @@ export default function InterventionsView() {
         accentText: "text-blue-600"
       };
     }
+    // 2. Higher Education
+    if (norm.includes('higher education') || norm.includes('college') || norm.includes('university')) {
+      return {
+        image: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1200&q=80",
+        gradient: "from-indigo-600 to-violet-800",
+        borderGroup: "border-indigo-200/80",
+        indicator: "bg-indigo-400",
+        accentText: "text-indigo-600"
+      };
+    }
+    // 3. Urban Education
+    if (norm.includes('urban education')) {
+      return {
+        image: "https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=1200&q=80",
+        gradient: "from-cyan-600 to-blue-700",
+        borderGroup: "border-cyan-200/80",
+        indicator: "bg-cyan-400",
+        accentText: "text-cyan-600"
+      };
+    }
+    // 4. Primary Healthcare
+    if (norm.includes('primary care') || norm.includes('primary health')) {
+      return {
+        image: "https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?auto=format&fit=crop&w=1200&q=80",
+        gradient: "from-emerald-600 to-teal-700",
+        borderGroup: "border-emerald-200/80",
+        indicator: "bg-emerald-400",
+        accentText: "text-emerald-600"
+      };
+    }
+    // 5. Secondary Healthcare
+    if (norm.includes('secondary care') || norm.includes('taluk hospital')) {
+      return {
+        image: "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=1200&q=80",
+        gradient: "from-teal-600 to-cyan-800",
+        borderGroup: "border-teal-200/80",
+        indicator: "bg-teal-400",
+        accentText: "text-teal-600"
+      };
+    }
+    // 6. Tertiary Healthcare
+    if (norm.includes('tertiary care') || norm.includes('medical college') || norm.includes('super-specialty')) {
+      return {
+        image: "https://images.unsplash.com/photo-1551076805-e1869033e561?auto=format&fit=crop&w=1200&q=80",
+        gradient: "from-sky-700 to-blue-900",
+        borderGroup: "border-sky-200/80",
+        indicator: "bg-sky-400",
+        accentText: "text-sky-600"
+      };
+    }
+    // 7. Urban Health
+    if (norm.includes('urban health')) {
+      return {
+        image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1200&q=80",
+        gradient: "from-teal-600 to-emerald-800",
+        borderGroup: "border-teal-200/80",
+        indicator: "bg-teal-400",
+        accentText: "text-teal-600"
+      };
+    }
+    // General Health fallback
     if (norm.includes('health') || norm.includes('hospital') || norm.includes('medical')) {
       return {
         image: "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=1200&q=80",
@@ -212,26 +275,159 @@ export default function InterventionsView() {
         accentText: "text-emerald-600"
       };
     }
-    if (norm.includes('environment') || norm.includes('water') || norm.includes('green') || norm.includes('forest')) {
+    // 8. Social Justice
+    if (norm.includes('social justice') || norm.includes('tribal') || norm.includes('adi dravidar')) {
       return {
-        image: "https://images.unsplash.com/photo-1466692476868-aef1dfb1e735?auto=format&fit=crop&w=1200&q=80",
-        gradient: "from-teal-600 to-emerald-800",
+        image: "https://images.unsplash.com/photo-1531206715517-5c0ba140b2b8?auto=format&fit=crop&w=1200&q=80",
+        gradient: "from-amber-600 to-yellow-800",
+        borderGroup: "border-amber-200/80",
+        indicator: "bg-amber-400",
+        accentText: "text-amber-600"
+      };
+    }
+    // 9. Child Protection
+    if (norm.includes('child protection') || norm.includes('orphan')) {
+      return {
+        image: "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&w=1200&q=80",
+        gradient: "from-rose-500 to-pink-700",
+        borderGroup: "border-rose-200/80",
+        indicator: "bg-rose-400",
+        accentText: "text-rose-600"
+      };
+    }
+    // 10. ICDS / Women & Child
+    if (norm.includes('icds') || norm.includes('women') || norm.includes('anganwadi')) {
+      return {
+        image: "https://images.unsplash.com/photo-1536640712-4d4c36ff0e4e?auto=format&fit=crop&w=1200&q=80",
+        gradient: "from-fuchsia-600 to-purple-800",
+        borderGroup: "border-fuchsia-200/80",
+        indicator: "bg-fuchsia-400",
+        accentText: "text-fuchsia-600"
+      };
+    }
+    // 11. Social Welfare
+    if (norm.includes('social welfare') || norm.includes('elder') || norm.includes('senior')) {
+      return {
+        image: "https://images.unsplash.com/photo-1516307365426-bea591f05011?auto=format&fit=crop&w=1200&q=80",
+        gradient: "from-purple-600 to-indigo-800",
+        borderGroup: "border-purple-200/80",
+        indicator: "bg-purple-400",
+        accentText: "text-purple-600"
+      };
+    }
+    // 12. Welfare of Differently Abled
+    if (norm.includes('differently abled') || norm.includes('special needs') || norm.includes('disabled')) {
+      return {
+        image: "https://images.unsplash.com/photo-1508847154043-be5407fcaa5a?auto=format&fit=crop&w=1200&q=80",
+        gradient: "from-violet-600 to-purple-800",
+        borderGroup: "border-violet-200/80",
+        indicator: "bg-violet-400",
+        accentText: "text-violet-600"
+      };
+    }
+    // 13. Digital Governance
+    if (norm.includes('digital') || norm.includes('governance') || norm.includes('it infrastructure') || norm.includes('e-gov')) {
+      return {
+        image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1200&q=80",
+        gradient: "from-blue-700 to-indigo-950",
+        borderGroup: "border-blue-300/80",
+        indicator: "bg-cyan-400",
+        accentText: "text-cyan-600"
+      };
+    }
+    // 14. Skill Development
+    if (norm.includes('skill') || norm.includes('vocational') || norm.includes('iti') || norm.includes('training')) {
+      return {
+        image: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=1200&q=80",
+        gradient: "from-amber-600 to-amber-900",
+        borderGroup: "border-amber-200/80",
+        indicator: "bg-amber-400",
+        accentText: "text-amber-600"
+      };
+    }
+    // 15. Municipal Administration
+    if (norm.includes('municipal') || norm.includes('corporation') || norm.includes('urban administration')) {
+      return {
+        image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80",
+        gradient: "from-slate-700 to-slate-950",
+        borderGroup: "border-slate-300/80",
+        indicator: "bg-slate-400",
+        accentText: "text-slate-700"
+      };
+    }
+    // 16. Urban Sanitation
+    if (norm.includes('sanitation') || norm.includes('waste') || norm.includes('cleaning') || norm.includes('hygiene')) {
+      return {
+        image: "https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?auto=format&fit=crop&w=1200&q=80",
+        gradient: "from-teal-600 to-emerald-700",
         borderGroup: "border-teal-200/80",
         indicator: "bg-teal-400",
         accentText: "text-teal-600"
       };
     }
-    if (norm.includes('rural') || norm.includes('infrastructure') || norm.includes('road')) {
+    // 17. Urban Infrastructure
+    if (norm.includes('urban infrastructure') || norm.includes('street light') || norm.includes('drain')) {
       return {
-        image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80",
+        image: "https://images.unsplash.com/photo-1506157786151-b8491531f063?auto=format&fit=crop&w=1200&q=80",
+        gradient: "from-blue-600 to-slate-800",
+        borderGroup: "border-blue-200/80",
+        indicator: "bg-blue-400",
+        accentText: "text-blue-600"
+      };
+    }
+    // 18. Urban Greening
+    if (norm.includes('urban green') || norm.includes('park') || norm.includes('miyawaki')) {
+      return {
+        image: "https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?auto=format&fit=crop&w=1200&q=80",
+        gradient: "from-emerald-600 to-teal-800",
+        borderGroup: "border-emerald-200/80",
+        indicator: "bg-emerald-400",
+        accentText: "text-emerald-600"
+      };
+    }
+    // 19. Agriculture / Horticulture
+    if (norm.includes('agri') || norm.includes('horticulture') || norm.includes('farmer') || norm.includes('crop')) {
+      return {
+        image: "https://images.unsplash.com/photo-1500937386664-56d1dfef3854?auto=format&fit=crop&w=1200&q=80",
+        gradient: "from-lime-600 to-emerald-800",
+        borderGroup: "border-lime-200/80",
+        indicator: "bg-lime-400",
+        accentText: "text-lime-600"
+      };
+    }
+    // 20. Forest / Environment
+    if (norm.includes('forest') || norm.includes('environment') || norm.includes('hill') || norm.includes('ecology') || norm.includes('water')) {
+      return {
+        image: "https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=1200&q=80",
+        gradient: "from-emerald-700 to-green-950",
+        borderGroup: "border-emerald-200/80",
+        indicator: "bg-emerald-400",
+        accentText: "text-emerald-600"
+      };
+    }
+    // 21. Rural Development
+    if (norm.includes('rural') || norm.includes('panchayat') || norm.includes('village')) {
+      return {
+        image: "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=1200&q=80",
         gradient: "from-amber-600 to-orange-700",
         borderGroup: "border-amber-200/80",
         indicator: "bg-amber-400",
         accentText: "text-amber-600"
       };
     }
+    // 22. Animal Husbandry
+    if (norm.includes('animal') || norm.includes('husbandry') || norm.includes('veterinary') || norm.includes('cattle') || norm.includes('dairy')) {
+      return {
+        image: "https://images.unsplash.com/photo-1527153857715-3908f2ae5e81?auto=format&fit=crop&w=1200&q=80",
+        gradient: "from-emerald-700 to-amber-800",
+        borderGroup: "border-emerald-200/80",
+        indicator: "bg-amber-400",
+        accentText: "text-emerald-700"
+      };
+    }
+    // General fallback
     return {
-      image: "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&w=1200&q=80",
+      image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80",
       gradient: "from-[#0A3D62] to-[#1B6CA8]",
       borderGroup: "border-slate-200/80",
       indicator: "bg-emerald-400",
