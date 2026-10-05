@@ -6,7 +6,7 @@ export default function Header() {
       <div className="w-full flex flex-col items-center pt-1 pb-4 px-4">
         {/* Logo */}
         <img 
-          src="/images/logo.webp" 
+          src={`${import.meta.env.BASE_URL}images/logo.webp`}
           alt="TN Govt Logo" 
           className="h-36 w-36 sm:h-44 sm:w-44 object-contain mb-1 mix-blend-multiply hover:scale-105 transition-transform"
         />

@@ -30,7 +30,7 @@ const DEFAULT_SALEM_CONTRIBUTORS: ContributorEntity[] = [
   {
     id: 1,
     companyName: "Steel Authority of India Ltd (SAIL - Salem Steel Plant)",
-    logo: "/images/sail-logo.png",
+    logo: `${import.meta.env.BASE_URL}images/sail-logo.png`,
     totalOutlayLakhs: 185.00,
     sector: "Healthcare & Education",
     works: [
@@ -54,7 +54,7 @@ const DEFAULT_SALEM_CONTRIBUTORS: ContributorEntity[] = [
   {
     id: 2,
     companyName: "Tamil Nadu Magnesite Limited (TANMAG)",
-    logo: "/images/tanmag-logo.png",
+    logo: `${import.meta.env.BASE_URL}images/tanmag-logo.png`,
     totalOutlayLakhs: 120.00,
     sector: "Environment & Water",
     works: [
@@ -73,7 +73,7 @@ const DEFAULT_SALEM_CONTRIBUTORS: ContributorEntity[] = [
   {
     id: 3,
     companyName: "Southern Iron & Steel Company Ltd (SISCOL / JSW Salem)",
-    logo: "/images/siscol-logo.png",
+    logo: `${import.meta.env.BASE_URL}images/siscol-logo.png`,
     totalOutlayLakhs: 95.00,
     sector: "Education & Water",
     works: [
@@ -92,7 +92,7 @@ const DEFAULT_SALEM_CONTRIBUTORS: ContributorEntity[] = [
   {
     id: 4,
     companyName: "Salem Starch & Sago Manufacturers Service (SAGOSERVE)",
-    logo: "/images/sago-logo.png",
+    logo: `${import.meta.env.BASE_URL}images/sago-logo.png`,
     totalOutlayLakhs: 75.00,
     sector: "Women Livelihood",
     works: [
@@ -106,7 +106,7 @@ const DEFAULT_SALEM_CONTRIBUTORS: ContributorEntity[] = [
   {
     id: 5,
     companyName: "JSW Foundation (Salem Works)",
-    logo: "/images/jsw.jpg",
+    logo: `${import.meta.env.BASE_URL}images/jsw.jpg`,
     totalOutlayLakhs: 45.00,
     sector: "Maternal Health",
     works: [

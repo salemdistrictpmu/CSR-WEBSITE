@@ -1053,31 +1053,31 @@ export default function HomeView({ setActivePage, onSelectContributor }: HomeVie
               { 
                 id: 1,
                 name: 'Steel Authority of India Ltd (SAIL)',
-                logo: '/images/sail-logo.png',
+                logo: `${import.meta.env.BASE_URL}images/sail-logo.png`,
                 desc: 'Supporting Salem\'s community healthcare, education, and rural development through sustained CSR initiatives from the Salem Steel Plant.' 
               },
               { 
                 id: 4,
                 name: 'Salem Starch & Sago Manufacturers (SAGOSERVE)',
-                logo: '/images/sago-logo.png',
+                logo: `${import.meta.env.BASE_URL}images/sago-logo.png`,
                 desc: 'Enhancing women empowerment and artisan livelihoods with modern automated powerlooms and food processing units.' 
               },
               { 
                 id: 3,
                 name: 'Southern Iron & Steel Company (SISCOL / JSW)',
-                logo: '/images/siscol-logo.png',
+                logo: `${import.meta.env.BASE_URL}images/siscol-logo.png`,
                 desc: 'Strengthening rural education with smart science labs and community RO drinking water plants across Salem district.' 
               },
               { 
                 id: 5,
                 name: 'JSW Foundation (Salem Works)', 
-                logo: '/images/jsw.jpg',
+                logo: `${import.meta.env.BASE_URL}images/jsw.jpg`,
                 desc: 'Upgrading community healthcare resources by supplying specialized medical diagnostic equipment to government hospitals.' 
               },
               { 
                 id: 2,
                 name: 'Tamil Nadu Magnesite Limited (TANMAG)',
-                logo: '/images/tanmag-logo.png',
+                logo: `${import.meta.env.BASE_URL}images/tanmag-logo.png`,
                 desc: 'Empowering agricultural communities and environmental conservation through green belt afforestation and water rejuvenation.' 
               }
             ].map((company) => (
